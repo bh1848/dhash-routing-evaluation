@@ -1,0 +1,5 @@
+redis==6.4.0
+hiredis==3.3.0
+xxhash==3.6.0
+pandas==2.3.3
+numpy==2.3.4

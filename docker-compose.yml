@@ -1,0 +1,85 @@
+version: "3.9"
+
+services:
+  redis-1:
+    image: redis:7.4.2
+    container_name: redis-1
+    command: ["redis-server", "--appendonly", "no", "--save", ""]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 1s
+      retries: 15
+    networks: [redis-cluster]
+
+  redis-2:
+    image: redis:7.4.2
+    container_name: redis-2
+    command: ["redis-server", "--appendonly", "no", "--save", ""]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 1s
+      retries: 15
+    networks: [redis-cluster]
+
+  redis-3:
+    image: redis:7.4.2
+    container_name: redis-3
+    command: ["redis-server", "--appendonly", "no", "--save", ""]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 1s
+      retries: 15
+    networks: [redis-cluster]
+
+  redis-4:
+    image: redis:7.4.2
+    container_name: redis-4
+    command: ["redis-server", "--appendonly", "no", "--save", ""]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 1s
+      retries: 15
+    networks: [redis-cluster]
+
+  redis-5:
+    image: redis:7.4.2
+    container_name: redis-5
+    command: ["redis-server", "--appendonly", "no", "--save", ""]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 1s
+      retries: 15
+    networks: [redis-cluster]
+
+  runner:
+    build:
+      context: .
+      dockerfile: Dockerfile.runner
+    image: dhash-runner:latest
+    container_name: runner
+    working_dir: /workspace
+    environment:
+      - PYTHONHASHSEED=123
+    volumes:
+      - .:/workspace
+    networks: [redis-cluster]
+    depends_on:
+      redis-1:
+        condition: service_healthy
+      redis-2:
+        condition: service_healthy
+      redis-3:
+        condition: service_healthy
+      redis-4:
+        condition: service_healthy
+      redis-5:
+        condition: service_healthy
+
+networks:
+  redis-cluster:
+    driver: bridge

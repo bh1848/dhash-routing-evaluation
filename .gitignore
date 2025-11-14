@@ -1,0 +1,42 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# ===== Build / Packaging =====
+build/
+dist/
+*.egg-info/
+
+# ===== OS / Editor Files =====
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# ===== Experiment Outputs =====
+results/*
+!results/.gitkeep
+*.csv
+
+# ===== Logs =====
+*.log
+
+# ===== Docker =====
+.docker/
+
+# ===== Raw Datasets =====
+data/*
+!data/.gitkeep
